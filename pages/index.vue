@@ -44,6 +44,10 @@
         <v-card-title class="headline">Datos a transformar en fichas de producto</v-card-title>
           <v-data-table :headers="headers" :items="articulos" :items-per-page="5" class="elevation-1"></v-data-table>
       </v-card>
+      <br>
+      <v-card>
+        <div style="text-align:center;"><nuxt-link to="/page1" style="color:red;">Ir para PruebaShop</nuxt-link></div>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
