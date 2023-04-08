@@ -5,18 +5,13 @@
             <h1 style="color: red;">PruebaShop</h1>
         
         <v-spacer />
-        <!--<v-toolbar-title v-if="$store.state.token">-->
         <v-toolbar-title>
           <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
-          <nuxt-link to="/product/create/" class="mr-4">Create(admin)</nuxt-link>
-          <span>User</span>
-          <!--<span class="mr-4">{{ $store.state.user.name }}</span>-->
+          <span class="mr-4">"Hola, {{ $store.state.user.name }}"</span>
           <v-btn color="error" @click="logout">Logout</v-btn>
-        <!--</v-toolbar-title>-->
-        <!--<v-toolbar-title v-else>-->
-          <nuxt-link to="/login" class="mx-4">Login</nuxt-link>
-          <nuxt-link to="/signup" class="mx-4">Signup</nuxt-link>
           <nuxt-link to="/carrito" class="mx-4">Carrito</nuxt-link>
+          <nuxt-link to="/product/create/" class="mr-4">Inserir_Produto</nuxt-link>
+          <nuxt-link to="/product/edit/" class="mr-4">Editar_Produto</nuxt-link>
         </v-toolbar-title>
       </v-card>
       <v-main>
@@ -26,7 +21,7 @@
           <v-col cols="12" sm="8" md="6">
             <v-card>
               <v-card-title>
-                <h1 class="my-4 text-center">Create Product</h1>
+                <h1 class="my-4 text-center">Crear Produto</h1>
                 <form action="" id="w-100" @submit.prevent="create">
                   <v-textField
                     label="Enter Your Title"

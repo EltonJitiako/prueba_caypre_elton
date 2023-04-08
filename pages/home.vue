@@ -1,11 +1,3 @@
-<!--<template>
-    <v-app-bar :clipped-left="clipped" fixed app>
-        <nuxt-link to="/" style="color:blue;">Descripción de la prueba</nuxt-link>
-        <nuxt-link to="/login" style="color:blue;">Login</nuxt-link>
-        <h1 style="color: red;">PruebaShop</h1>
-    </v-app-bar>
-    
-</template>-->
 
 <template>
     <v-app>
@@ -14,19 +6,30 @@
             <h1 style="color: red;">PruebaShop</h1>
         
         <v-spacer />
-        <!--<v-toolbar-title v-if="$store.state.token">-->
+        <div v-if="$store.state.token">
+        <v-toolbar-title v-if="$store.state.user.name[0]===' '">
+          <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
+          <span class="mr-4">"Hola, {{ $store.state.user.name }}"</span>
+          <v-btn color="error" @click="logout">Logout</v-btn>
+          <nuxt-link to="/carrito" class="mx-4">Carrito</nuxt-link>
+        </v-toolbar-title>
+        <v-toolbar-title v-else-if="$store.state.user.name[0]==='('">
+          <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
+          <span class="mr-4">"Hola, {{ $store.state.user.name }}"</span>
+          <v-btn color="error" @click="logout">Logout</v-btn>
+          <nuxt-link to="/carrito" class="mx-4">Carrito</nuxt-link>
+          <nuxt-link to="/product/create/" class="mr-4">Inserir_Produto</nuxt-link>
+          <nuxt-link to="/product/edit/" class="mr-4">Editar_Produto</nuxt-link>
+        </v-toolbar-title>
+        </div>
+        <div v-else>
         <v-toolbar-title>
           <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
-          <nuxt-link to="/product/create/" class="mr-4">Create(admin)</nuxt-link>
-          
-          <span class="mr-4">{{ $store.state.user.name }}</span>
-          <v-btn color="error" @click="logout">Logout</v-btn>
-        <!--</v-toolbar-title>-->
-        <!--<v-toolbar-title v-else>-->
           <nuxt-link to="/login" class="mx-4">Login</nuxt-link>
           <nuxt-link to="/signup" class="mx-4">Signup</nuxt-link>
           <nuxt-link to="/carrito" class="mx-4">Carrito</nuxt-link>
         </v-toolbar-title>
+      </div>
       </v-card>
       <v-main>
         
