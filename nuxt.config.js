@@ -2,7 +2,7 @@ const pkg = require('./package')
 import colors from 'vuetify/es5/util/colors';
 
 export default {
-
+  ssr: false,
   /*
   ** Headers of the page
   */
@@ -41,8 +41,19 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
+    // https://go.nuxtjs.dev/axios
+    '@nuxtjs/axios',
   ],
+
+
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {
+    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+    baseURL: '/',
+  },
+
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: true,
 
   /*
   /*

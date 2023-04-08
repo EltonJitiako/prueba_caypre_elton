@@ -46,7 +46,7 @@
       </v-card>
       <br>
       <v-card>
-        <div style="text-align:center;"><nuxt-link to="/page1" style="color:red;">Ir para PruebaShop</nuxt-link></div>
+        <div style="text-align:center;"><nuxt-link to="/home" style="color:red;">Ir para PruebaShop</nuxt-link></div>
       </v-card>
     </v-flex>
   </v-layout>
