@@ -1,30 +1,33 @@
 <template>
     <v-app>
-      <div v-if="$store.state.user.name[0]==='('">
-        <nuxt-link to="/"> Descripción de la prueba</nuxt-link>
+            <nuxt-link to="/"> Descripción de la prueba</nuxt-link>
         <v-card>
             <h1 style="color: red;">PruebaShop</h1>
         
         <v-spacer />
         <v-toolbar-title>
-          <nuxt-link to="/home_a" class="mx-4">Home</nuxt-link>
+          <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
           <span class="mr-4">"Hola, {{ $store.state.user.name }}"</span>
-          <nuxt-link to="/logout" class="mx-4">Logout</nuxt-link>
-          <nuxt-link to="/carrito_a" class="mx-4">Carrito</nuxt-link>
+          <v-btn color="error" @click="logout">Logout</v-btn>
+          <nuxt-link to="/carrito" class="mx-4">Carrito</nuxt-link>
           <nuxt-link to="/product/create/" class="mr-4">Inserir_Produto</nuxt-link>
           <nuxt-link to="/product/edit/" class="mr-4">Editar_Produto</nuxt-link>
         </v-toolbar-title>
-      
       </v-card>
       <v-main>
-        <div>
+    <div>
       <v-container>
         <v-row justify="center" align="center">
           <v-col cols="12" sm="8" md="6">
             <v-card>
               <v-card-title>
-                <h1 class="my-4 text-center">Crear Produto</h1>
-                <form action="" id="w-100" @submit.prevent="create">
+                <h1 class="my-4 text-center">Editar</h1>
+                <form action="" id="w-100" @submit.prevent="updatePro">
+                  <v-textField
+                    label="Enter Your id"
+                    v-model="id"
+                    type="hidden"
+                  ></v-textField>
                   <v-textField
                     label="Enter Your Title"
                     v-model="title"
@@ -48,14 +51,8 @@
         </v-row>
       </v-container>
     </div>
-      </v-main>
-      </div>
-      <div v-else>
-        <h1>Vc nao e admin</h1>
-        <nuxt-link to="/home_a" class="mx-4">Home</nuxt-link>
-      </div>
-    </v-app>
-    
+    </v-main>
+</v-app>
   </template>
   <script>
   import { mapActions } from "vuex";
@@ -63,43 +60,49 @@
     middleware: ["auth"],
     data() {
       return {
+        id: "",
         title: "",
         content: "",
         price: "",
       };
     },
+  
     methods: {
-      ...mapActions(["createProduct"]),
-      create() {
-        if (!this.title || !this.content || !this.price) {
-          alert("Please fill all the field");
+      async getProductById() {
+        const data = {
+          id: this.$route.params.productid,
+        };
+        const res = await this.$axios.post(
+          "http://localhost/prueba_caypre_elton_back.php/crud-file/get-single-products.php",
+          data
+        );
+        if (res.data.status == 1) {
+          this.id = res.data.message[0].id;
+          this.title = res.data.message[0].title;
+          this.content = res.data.message[0].content;
+          this.price = res.data.message[0].price;
+        }
+      },
+  
+      ...mapActions(["updateProduct"]),
+      updatePro() {
+        if (!this.title || !this.price || !this.content) {
+          alert("Please Fill the Field");
         } else {
           const data = {
+            id: this.id,
             title: this.title,
             content: this.content,
             price: this.price,
           };
-          this.createProduct(data);
+          this.updateProduct(data);
         }
       },
     },
-    methods: {
-      ...mapActions(["logoutUser"]),
-      ...mapActions(["readUser"]),
-      logout() {
-        this.logoutUser();
-      },
-    },
     mounted() {
-      this.readUser();
+      this.getProductById();
     },
   };
   </script>
   <style>
-  #w-100 {
-    width: 100%;
-  }
-  .text-center {
-    text-align: center !important;
-  }
   </style>

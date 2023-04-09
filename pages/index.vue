@@ -46,7 +46,12 @@
       </v-card>
       <br>
       <v-card>
+        <div v-if="!$store.state.token">
         <div style="text-align:center;"><nuxt-link to="/home" style="color:red;">Ir para PruebaShop</nuxt-link></div>
+        </div>
+        <div v-else>
+        <div style="text-align:center;"><nuxt-link to="/home_a" style="color:red;">Ir para PruebaShop</nuxt-link></div>
+        </div>
       </v-card>
     </v-flex>
   </v-layout>

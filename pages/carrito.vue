@@ -9,13 +9,13 @@
         <v-toolbar-title v-if="$store.state.user.name[0]===' '">
           <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
           <span class="mr-4">"Hola, {{ $store.state.user.name }}"</span>
-          <v-btn color="error" @click="logout">Logout</v-btn>
+          <nuxt-link to="/logout" class="mx-4">Logout</nuxt-link>
           <nuxt-link to="/carrito" class="mx-4">Carrito</nuxt-link>
         </v-toolbar-title>
         <v-toolbar-title v-else-if="$store.state.user.name[0]==='('">
           <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
           <span class="mr-4">"Hola, {{ $store.state.user.name }}"</span>
-          <v-btn color="error" @click="logout">Logout</v-btn>
+          <nuxt-link to="/logout" class="mx-4">Logout</nuxt-link>
           <nuxt-link to="/carrito" class="mx-4">Carrito</nuxt-link>
           <nuxt-link to="/product/create/" class="mr-4">Inserir_Produto</nuxt-link>
           <nuxt-link to="/product/edit/" class="mr-4">Editar_Produto</nuxt-link>
@@ -35,3 +35,9 @@
       </v-main>
     </v-app>
   </template>
+   <script>
+   import { mapActions } from "vuex";
+   export default {
+     middleware: ["guest"],
+   };
+ </script>

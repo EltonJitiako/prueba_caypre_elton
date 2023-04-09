@@ -57,7 +57,7 @@
 <script>
   import { mapActions } from "vuex";
   export default {
-    middleware: "guest",
+    middleware: ["guest"],
     data() {
       return {
         name: "",

@@ -53,7 +53,7 @@ export const actions = {
             localStorage.setItem('token', res.data.jwt);
             commit('setToken', res.data.jwt);
             alert(res.data.message)
-            this.$router.push("/home");
+            this.$router.push("/home_a");
 
         } else {
             alert(res.data.message)
@@ -87,7 +87,7 @@ export const actions = {
                 'Authorization': localStorage.getItem('token')
             }
         };
-        const res = await this.$axios.post('http://localhost/bkphp.php/crud-file/create-product.php', data, config);
+        const res = await this.$axios.post('http://localhost/prueba_caypre_elton_back.php/crud-file/create-product.php', data, config);
         if (res.data.status == 1) {
             alert(res.data.message);
             this.$router.push('/product/');
@@ -97,7 +97,7 @@ export const actions = {
     },
 
     async deleteProduct({ commit, state }, data) {
-        const res = await this.$axios.post('http://localhost/bkphp.php/crud-file/delete-products.php', data);
+        const res = await this.$axios.post('http://localhost/prueba_caypre_elton_back.php/crud-file/delete-products.php', data);
         const newProducts = state.products.filter(item => item.id !== data.id);
         if (res.data.status == 1) {
             alert(res.data.message);
@@ -108,14 +108,14 @@ export const actions = {
         }
     },
     async getAllProduct({ commit }) {
-        const res = await this.$axios.get('http://localhost/bkphp.php/crud-file/get-all-products.php');
+        const res = await this.$axios.get('http://localhost/prueba_caypre_elton_back.php/crud-file/get-all-products.php');
         if (res.data.status == 1) {
             commit('setProducts', res.data.message);
         }
     },
 
     async updateProduct(_, data) {
-        const res = await this.$axios.post('http://localhost/bkphp.php/crud-file/update-products.php', data);
+        const res = await this.$axios.post('http://localhost/prueba_caypre_elton_back.php/crud-file/update-products.php', data);
         if (res.data.status == 1) {
             alert(res.data.message);
             this.$router.push('/product/')
