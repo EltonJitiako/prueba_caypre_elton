@@ -1,10 +1,9 @@
 <template>
-    <v-app>
-        <nuxt-link to="/"> Descripción de la prueba</nuxt-link>
-        <v-card>
-            <h1 style="color: red;">PruebaShop</h1>
-        
-        <v-spacer />
+  <v-app>
+    <nuxt-link to="/"> Descripción de la prueba</nuxt-link>
+      <v-card>
+        <h1 style="color: red;">PruebaShop</h1>
+      <v-spacer />
         <v-toolbar-title>
           <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
           <nuxt-link to="/login" class="mx-4">Login</nuxt-link>
@@ -13,7 +12,7 @@
         </v-toolbar-title>
       </v-card>
       <v-main>
-        <div>
+      <div>
       <v-container>
         <v-row justify="center" align="center">
           <v-col cols="12" sm="8" md="6">
@@ -38,12 +37,10 @@
           </v-col>
         </v-row>
       </v-container>
-    </div>
-      </v-main>
-    
-
-</v-app>
-  </template>
+      </div>
+      </v-main> 
+  </v-app>
+</template>
 <script>
   import { mapActions } from "vuex";
   export default {
@@ -69,12 +66,12 @@
       },
     },
   };
-  </script>
-  <style>
+</script>
+<style>
   #w-100 {
     width: 100%;
   }
   .text-center {
     text-align: center !important;
   }
-  </style>
+</style>

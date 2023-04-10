@@ -1,43 +1,64 @@
 <template>
-    <v-app>
-        <nuxt-link to="/"> Descripción de la prueba</nuxt-link>
-        <v-card>
-            <h1 style="color: red;">PruebaShop</h1>
-        
-        <v-spacer />
-        <div v-if="$store.state.token">
-        <v-toolbar-title v-if="$store.state.user.name[0]===' '">
-          <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
-          <span class="mr-4">"Hola, {{ $store.state.user.name }}"</span>
-          <nuxt-link to="/logout" class="mx-4">Logout</nuxt-link>
-          <nuxt-link to="/carrito" class="mx-4">Carrito</nuxt-link>
-        </v-toolbar-title>
-        <v-toolbar-title v-else-if="$store.state.user.name[0]==='('">
-          <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
-          <span class="mr-4">"Hola, {{ $store.state.user.name }}"</span>
-          <nuxt-link to="/logout" class="mx-4">Logout</nuxt-link>
-          <nuxt-link to="/carrito" class="mx-4">Carrito</nuxt-link>
-          <nuxt-link to="/product/create/" class="mr-4">Inserir_Produto</nuxt-link>
-          <nuxt-link to="/product/edit/" class="mr-4">Editar_Produto</nuxt-link>
-        </v-toolbar-title>
-        </div>
-        <div v-else>
+  <v-app>
+    <nuxt-link to="/"> Descripción de la prueba</nuxt-link>
+      <v-card>
+        <h1 style="color: red;">PruebaShop</h1>
+      <v-spacer />
         <v-toolbar-title>
           <nuxt-link to="/home" class="mx-4">Home</nuxt-link>
           <nuxt-link to="/login" class="mx-4">Login</nuxt-link>
           <nuxt-link to="/signup" class="mx-4">Signup</nuxt-link>
           <nuxt-link to="/carrito" class="mx-4">Carrito</nuxt-link>
         </v-toolbar-title>
-        </div>
       </v-card>
       <v-main>
+        <span>{{ this.$shop }}</span>
         <v-btn color="green" to="/fel_compra">Finalizar compra</v-btn>
-      </v-main>
+        </v-main>
     </v-app>
   </template>
    <script>
-   import { mapActions } from "vuex";
-   export default {
-     middleware: ["guest"],
-   };
+
+     import { mapActions } from "vuex";
+     export default {
+    middleware: ["guest"],
+
+
+      methods: {
+      async getProductById() {
+        const data = {
+          id: this.$route.params.productid,
+        };
+        const res = await this.$axios.post(
+          "http://localhost/prueba_caypre_elton_back.php/crud-file/get-single-products.php",
+          data
+        );
+        if (res.data.status == 1) {
+          this.id = res.data.message[0].id;
+          this.title = res.data.message[0].title;
+          this.content = res.data.message[0].content;
+          this.url = res.data.message[0].url;
+          this.price = res.data.message[0].price;
+          this.rate = res.data.message[0].rate;
+        }
+      },
+    },
+mounted() {
+  this.getProductById();
+},
+methods: {
+  copy (id) {
+      state.shop=id;
+      alert(state.shop);
+      
+  },
+  ...mapActions(["getAllProduct"]),
+  
+  
+},
+mounted() {
+  this.getAllProduct();
+},
+
+};
  </script>

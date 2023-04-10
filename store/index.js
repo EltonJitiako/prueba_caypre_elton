@@ -2,19 +2,20 @@
 export const state = () => ({
     token: localStorage.getItem('token') || '',
     user: {},
-    products: []
+    products: [],
 })
 
 export const getters = {
     user: (state) => {
-        return state.user
+        return state.user;
     },
     token: (state) => {
-        return state.token
+        return state.token;
     },
     products: (state) => {
         return state.products;
-    }
+    },
+
 }
 
 export const mutations = {
@@ -22,11 +23,13 @@ export const mutations = {
         state.user = user;
     },
     setToken(state, token) {
-        state.token = token
+        state.token = token;
     },
     setProducts(state, products) {
         state.products = products;
-    }
+    },
+
+
 }
 
 
@@ -90,7 +93,7 @@ export const actions = {
         const res = await this.$axios.post('http://localhost/prueba_caypre_elton_back.php/crud-file/create-product.php', data, config);
         if (res.data.status == 1) {
             alert(res.data.message);
-            this.$router.push('/product/');
+            this.$router.push('/home_a');
         } else {
             alert(res.data.message);
         }
@@ -118,7 +121,7 @@ export const actions = {
         const res = await this.$axios.post('http://localhost/prueba_caypre_elton_back.php/crud-file/update-products.php', data);
         if (res.data.status == 1) {
             alert(res.data.message);
-            this.$router.push('/product/')
+            this.$router.push('/home_a')
         } else {
             alert(res.data.message);
         }
